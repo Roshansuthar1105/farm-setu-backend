@@ -17,8 +17,8 @@ router.get('/:id', async (req, res) => {
 });
 router.patch('/:id',async(req,res)=>{
     try {
-        const {id}=req.params;
-        const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+        const {id} = req.params;
+        const user = await User.findByIdAndUpdate(id, req.body, { new: true, select: '-cart -createdAt -password' });
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
